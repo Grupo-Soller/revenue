@@ -110,7 +110,7 @@ setupSidebarToggle() {
     mainContainer.classList.remove('sidebar-hidden');
     toggleBtn.classList.remove('visible');
     toggleBtn.innerHTML = '<span class="material-icons"></span>'; // > quando aberto
-    toggleBtn.style.right = '325px';
+    toggleBtn.style.right = '-325px';
     
     const toggleSidebar = () => {
         isRetracted = !isRetracted;
@@ -131,7 +131,7 @@ setupSidebarToggle() {
             visualization.classList.remove('expanded');
             mainContainer.classList.remove('sidebar-hidden');
             toggleBtn.innerHTML = '<span class="material-icons"></span>'; // > quando aberto
-            toggleBtn.style.right = '325px'; // Posição ao lado da sidebar aberta
+            toggleBtn.style.right = '-325px'; // Posição ao lado da sidebar aberta
             
             // Salvar estado
             localStorage.setItem('matrixSidebarRetracted', 'false');
@@ -188,6 +188,7 @@ setupSidebarToggle() {
         justify-content: center;
         transition: all 0.3s ease;
         z-index: 101;
+        padding-bottom: 15px;
     `;
     
     // Botão fullscreen
@@ -252,13 +253,13 @@ setupSidebarToggle() {
                             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
                         }
                         50% {
-                            transform: scale(1.15);
+                            transform: scale(1.05);
                             box-shadow: 0 12px 24px rgba(167, 139, 250, 0.6);
                         }
                     }
                     .floating-unicorn-button.pulsing {
-                        animation: unicornPulse 1.5s infinite;
-                        background: linear-gradient(135deg, #a78bfa 0%, #6d28d9 100%) !important;
+                        animation: unicornPulse 1.9s infinite;
+                        background: linear-gradient(-135deg, #a78bfa 0%, #6d28d9 100%) !important;
                     }
                 `;
                 document.head.appendChild(style);
@@ -1443,51 +1444,42 @@ toggleFullScreen() {
     const container = document.getElementById('currentPosition');
     if (!container || !MatrixData) return;
     
-    // Criar grupos
     container.innerHTML = '';
     
-    const businessGroup = document.createElement('div');
-    businessGroup.className = 'dimension-group';
-    businessGroup.innerHTML = '<h5>Pilares do Negócio</h5>';
-    
-    const marketGroup = document.createElement('div');
-    marketGroup.className = 'dimension-group';
-    marketGroup.innerHTML = '<h5>Propriedades do Mercado</h5>';
-    
-    container.appendChild(businessGroup);
-    container.appendChild(marketGroup);
-    
-    // Adicionar métricas sem sliders (apenas visualização)
-    ['tech', 'platform', 'recurring'].forEach(key => {
-        const dim = MatrixData.dimensions[key];
+    // Criar sliders funcionais para cada dimensão
+    Object.entries(MatrixData.dimensions).forEach(([key, dim]) => {
         const value = Math.round(position[key]);
         
-        const metric = document.createElement('div');
-        metric.className = 'position-metric';
-        metric.innerHTML = `
+        const control = document.createElement('div');
+        control.className = 'position-metric slider-control';
+        control.innerHTML = `
             <div class="label">${dim.icon} ${dim.name}</div>
-            <div class="value">${value}%</div>
+            <div class="slider-with-value">
+                <input type="range" 
+                       class="dimension-slider" 
+                       id="dim-slider-${key}"
+                       min="0" 
+                       max="100" 
+                       value="${value}"
+                       data-dimension="${key}"
+                       style="flex: 1;">
+                <div class="slider-value-display" id="dim-value-${key}">${value}%</div>
+            </div>
             <div class="axis-bar">
-                <div class="axis-fill" style="width: ${value}%"></div>
+                <div class="axis-fill" id="axis-fill-${key}" style="width: ${value}%"></div>
             </div>
         `;
-        businessGroup.appendChild(metric);
-    });
-    
-    ['scale', 'b2bFocus'].forEach(key => {
-        const dim = MatrixData.dimensions[key];
-        const value = Math.round(position[key]);
+        container.appendChild(control);
         
-        const metric = document.createElement('div');
-        metric.className = 'position-metric';
-        metric.innerHTML = `
-            <div class="label">${dim.icon} ${dim.name}</div>
-            <div class="value">${value}%</div>
-            <div class="axis-bar">
-                <div class="axis-fill" style="width: ${value}%"></div>
-            </div>
-        `;
-        marketGroup.appendChild(metric);
+        // CRUCIAL: Adicionar o event listener!
+        const slider = control.querySelector('.dimension-slider');
+        slider.addEventListener('input', (e) => {
+            this.onSliderChange(e);
+            // Atualizar displays em tempo real
+            const newValue = e.target.value;
+            document.getElementById(`dim-value-${key}`).textContent = `${Math.round(newValue)}%`;
+            document.getElementById(`axis-fill-${key}`).style.width = `${newValue}%`;
+        });
     });
 }
 
