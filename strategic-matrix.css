@@ -1,0 +1,833 @@
+/* Strategic Matrix 5D - Estilos */
+
+/* Modal Container */
+.unicorn-modal-content {
+    max-width: 95vw;
+    max-height: 90vh;
+    width: 1400px;
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+    border: 1px solid rgba(167, 139, 250, 0.2);
+    transition: opacity 0.3s ease;
+    transition: all 0.3s ease-in-out;
+    overflow: hidden;
+}
+
+.modal-header-buttons {
+    display: flex;
+    gap: 8px; /* Espaço entre os botões */
+}
+
+.modal-expand {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    font-size: 18px;
+}
+
+.modal-expand:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Classe que retrai o header */
+.modal-header.retracted {
+    height: 1px;
+    padding-top: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+    overflow: hidden;
+    pointer-events: none; /* Não captura cliques */
+}
+
+.unicorn-modal-content.full-screen .modal-header {
+  display: none;
+}
+
+/* Estilo do botão de alternância */
+.modal-header-toggle-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    font-size: 18px;
+}
+
+.unicorn-modal-content.fullscreen {
+  width: 100vw;
+  height: 100vh;
+  max-width: 100vw;
+  max-height: 100vh;
+  border-radius: 0;
+}
+
+.unicorn-modal-content.full-screen .unicorn-modal-body {
+    padding: 0 !important;
+    height: 100vh !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+}
+
+.unicorn-modal-content.full-screen .matrix-main-container {
+    height: 100% !important;
+    padding: 0 !important;
+}
+
+.unicorn-modal-content.full-screen #matrix3d-container {
+    background: #0a0a0a !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+    border: none !important;
+}
+
+.unicorn-modal-content.full-screen canvas {
+    margin: 0 !important;
+    border-radius: 0 !important;
+}
+
+.modal-header-toggle-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.modal-header-toggle-btn.retracted {
+    transform: rotate(180deg);
+}
+
+.unicorn-modal-content.full-screen {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    max-width: 100vw !important;
+    max-height: 100vh !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+    border: none !important;
+    padding: 0 !important;
+}
+
+.unicorn-modal-body {
+    padding: 0 !important;
+    display: flex;
+    flex-direction: column;
+    height: calc(90vh - 60px);
+    height: 100%;
+    overflow: hidden;
+    margin-bottom: 0 !important
+}
+
+/* Layout Principal */
+.matrix-main-container {
+    display: flex;
+    height: 100%;
+    gap: 0; /* Era 20px */
+    padding: 0; /* Remover qualquer padding */
+    overflow: hidden;
+}
+
+.matrix-visualization {
+    flex: 1;
+    background: #0a0a0a;
+    border-radius: 0; /* Remover bordas arredondadas */
+    overflow: hidden;
+    position: relative;
+    margin: 0; /* Remover margens */
+    padding: 0; /* Remover padding */
+    min-width: 0;
+}
+
+#matrix3d-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+#matrix3d-container canvas {
+    display: block;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+#matrix3d-container canvas:active {
+    cursor: grabbing;
+}
+
+/* Controles da Matrix */
+.matrix-controls {
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.3);
+    border-top: 1px solid rgba(167, 139, 250, 0.1);
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.matrix-btn {
+    padding: 8px 16px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 12px;
+}
+
+.matrix-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+.matrix-btn.secondary {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.matrix-btn.active {
+    background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+}
+
+.matrix-sidebar {
+    width: 320px;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 8; /* Era 20px */
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    z-index: 10;
+    margin: 0px;
+    max-height: 100%;
+    scrollbar-width: thin; /* Firefox */
+    scrollbar-color: rgba(167, 139, 250, 0.3) rgba(0, 0, 0, 0.3);
+}
+
+.matrix-sidebar::-webkit-scrollbar {
+    width: 8px;
+}
+
+.matrix-sidebar::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+}
+
+.matrix-sidebar::-webkit-scrollbar-thumb {
+    background: rgba(167, 139, 250, 0.3);
+    border-radius: 4px;
+}
+
+.matrix-sidebar::-webkit-scrollbar-thumb:hover {
+    background: rgba(167, 139, 250, 0.5);
+}
+
+.matrix-info-card:first-child {
+    margin-top: 0;
+}
+
+.matrix-sidebar.retracted {
+    width: 0;
+    opacity: 0;
+    padding: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+/* Visualização expandida */
+.matrix-visualization.expanded {
+    width: 100% !important;
+    margin: 0 !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Container do 3D quando expandido */
+.matrix-main-container.sidebar-hidden {
+    padding-right: none !important;
+    border: none !important;
+}
+
+.matrix-main-container.sidebar-hidden .matrix-visualization {
+    background: transparent !important;
+    border: none !important;
+}
+
+.dimension-group {
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 8px;
+    margin-bottom: 1px;
+    border: 1px solid rgba(167, 139, 250, 0.1);
+    position: relative;
+    z-index: 50 !important;
+    pointer-events: auto !important;
+}
+
+.dimension-group:last-child {
+    margin-bottom: 1px;
+}
+
+.dimension-group h5 {
+    font-size: 11px;
+    color: #a78bfa;
+    letter-spacing: 1.2px;
+    margin: -1px 0 8px 0;
+    font-weight: 600;
+}
+
+.position-metric.slider-control {
+    padding: 10px 0;
+    position: relative;
+    z-index: 51 !important;
+}
+
+.position-metric.slider-control:last-child {
+    padding-bottom: 0;
+}
+
+.position-metric.slider-control .label {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.slider-with-value {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 8px;
+    position: relative;
+    z-index: 52 !important;
+    pointer-events: auto !important;
+}
+
+.slider-value-display {
+    min-width: 48px;
+    text-align: right;
+    font-weight: 600;
+    color: #fff;
+    font-size: 14px;
+    background: rgba(167, 139, 250, 0.1);
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+
+
+
+/* Toggle Button Flutuante */
+.sidebar-toggle-floating {
+    position: absolute;
+    right: 2px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 80px;
+    background: transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 1001;
+    opacity: 1;
+}
+
+.sidebar-toggle-floating.visible {
+    display: flex  ;
+}
+
+.sidebar-toggle-floating.visible:hover {
+    background: transparent;
+    transform: translateY(-50%) translateX(-3px);
+    box-shadow: transparent;
+    opacity: 1;
+}
+
+.matrix-sidebar.hovering {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.matrix-info-card {
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(167, 139, 250, 0.1);
+    border-radius: 1px;
+    padding: 15px;
+}
+
+.matrix-info-card h4 {
+    margin: 0 0 15px 0;
+    color: #a78bfa;
+    font-size: 14px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.slider-with-value input[type="range"] {
+    flex: 1;
+}
+
+/* Métricas de Posição */
+.position-metrics {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.position-metric {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.position-metric .label {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.6);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.modal-open {
+  overflow: hidden;
+}
+
+.position-metric .value {
+    font-size: 18px;
+    font-weight: 600;
+    color: #fff;
+}
+
+.axis-bar {
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-bottom: 12px;
+}
+
+.axis-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #667eea 0%, #a78bfa 100%);
+    transition: width 0.5s ease;
+}
+
+/* Lista de Proximidade */
+.proximity-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.proximity-item {
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    border-left: 3px solid;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.unicorn-name {
+    font-weight: 500;
+    font-size: 13px;
+}
+
+.match-percent {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.7);
+    background: rgba(167, 139, 250, 0.2);
+    padding: 2px 8px;
+    border-radius: 12px;
+}
+
+/* Trade-offs */
+.tradeoffs-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.tradeoff-item {
+    padding: 8px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    border-left: 3px solid;
+}
+
+.tradeoff-item.positive {
+    border-left-color: #22c55e;
+}
+
+.tradeoff-item.negative {
+    border-left-color: #ef4444;
+}
+
+.tradeoff-label {
+    font-size: 12px;
+    color: #fff;
+    margin-bottom: 4px;
+}
+
+.tradeoff-impact {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* Painel Inferior */
+.matrix-bottom-panel {
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.3);
+    border-top: 1px solid rgba(167, 139, 250, 0.1);
+}
+
+.dimension-sliders {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    position: relative;
+    z-index: 52 !important;
+    cursor: pointer !important;
+    pointer-events: auto !important;
+}
+
+.dimension-control {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.dimension-control label {
+    font-size: 12px;
+    color: #a78bfa;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.value-display {
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+    text-align: right;
+    min-width: 40px;
+}
+
+.dimension-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 6px;
+    border-radius: 3px;
+    background: rgba(255, 255, 255, 0.1);
+    outline: none;
+    transition: background 0.3s;
+}
+
+.dimension-slider:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.dimension-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.dimension-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+    box-shadow: 0 0 10px rgba(102, 126, 234, 0.6);
+}
+
+.dimension-slider::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* Tooltip 3D */
+.matrix-tooltip {
+    position: fixed;
+    background: rgba(0, 0, 0, 0.95);
+    border: 1px solid rgba(167, 139, 250, 0.3);
+    border-radius: 8px;
+    padding: 12px;
+    pointer-events: none;
+    z-index: 10000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    max-width: 250px;
+}
+
+.matrix-tooltip.visible {
+    opacity: 1;
+}
+
+.matrix-tooltip h5 {
+    margin: 0 0 8px 0;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.tooltip-metrics {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.metric-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+}
+
+.metric-label {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.metric-label-chart {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 12px;
+}
+
+.metric-value {
+    color: #fff;
+    font-weight: 500;
+}
+
+/* Optimal Path Info */
+.optimal-path-info {
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, rgba(22, 163, 74, 0.1) 100%);
+    border: 1px solid rgba(34, 197, 94, 0.3);
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 10px;
+}
+
+.optimal-path-info h5 {
+    margin: 0 0 10px 0;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.path-metrics {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.metric-item {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+}
+
+.metric-item .label {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.metric-item .value {
+    color: #fff;
+    font-weight: 600;
+}
+
+/* Simulação Results */
+.simulation-results {
+    padding: 15px;
+}
+
+.simulation-results h4 {
+    margin: 0 0 15px 0;
+    color: #a78bfa;
+    font-size: 14px;
+}
+
+.simulation-metrics {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.sim-metric {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 8px;
+    border-radius: 6px;
+}
+
+.sim-metric .label {
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 4px;
+}
+
+.sim-metric .value {
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+}
+
+.sim-metric .value.positive {
+    color: #22c55e;
+}
+
+.sim-metric .value.negative {
+    color: #ef4444;
+}
+
+/* Loading Spinner */
+.simulation-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+    gap: 15px;
+}
+
+.loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(167, 139, 250, 0.2);
+    border-top-color: #a78bfa;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+.loading-text {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.unicorn-icon {
+    font-size: 20px;
+}
+
+/* Responsividade */
+@media (max-width: 1200px) {
+    .matrix-main-container {
+        flex-direction: column;
+    }
+    
+    .matrix-sidebar {
+        width: 100%;
+        flex-direction: row;
+        overflow-x: auto;
+    }
+    
+    .matrix-info-card {
+        min-width: 250px;
+    }
+}
+
+@media (max-width: 768px) {
+    .unicorn-modal-content {
+        width: 100vw;
+        max-width: 100vw;
+        height: 100vh;
+        max-height: 100vh;
+        border-radius: 0;
+    }
+    
+    .dimension-sliders {
+        grid-template-columns: 1fr;
+    }
+    
+    .matrix-controls {
+        flex-direction: column;
+    }
+    
+    .matrix-btn {
+        width: 100%;
+    }
+}
+
+/* Botão Unicórnio */
+.floating-unicorn-button {
+    position: fixed; /* O mesmo de floating-settings-button */
+    bottom: 20px;
+    left: 15px; /* Posicionamento no lado esquerdo */
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(-135deg, #ffffff 0%, #000000 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    z-index: 1000;
+    border: none;
+    color: white; /* Cor do ícone */
+    font-size: 24px;
+    backdrop-filter: blur(10px);
+    opacity: 80%;
+}
+
+.floating-unicorn-button:hover {
+     background: rgba(0, 0, 0, 0.5);
+     transform: scale(1.1);
+     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.floating-unicorn-button.modal-active {
+    background: linear-gradient(135deg, #a78bfa 0%, #6d28d9 100%);
+    border: none;
+}
+
+.floating-unicorn-button.active {
+    animation: unicornPulse 2s infinite;
+    background: rgba(255, 255, 255, 0.2);
+}
+
+@keyframes unicornPulse {
+    0%, 100% {
+        box-shadow: 0 0 10px rgba(167, 139, 250, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 30px rgba(167, 139, 250, 0.8),
+                    0 0 60px rgba(167, 139, 250, 0.4);
+    }
+}
